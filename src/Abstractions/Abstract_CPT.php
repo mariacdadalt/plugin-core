@@ -12,6 +12,8 @@ use WP_REST_Posts_Controller;
  */
 abstract class Abstract_CPT {
 
+    public const LOCAL_LANG_CODE = WPILLAR_LANG;
+
     /**
      * What is the name of this post type? If you don't override any of the labels,
      * this function will be used as base for creating the labels.
@@ -100,7 +102,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function plural_name() : string {
-        return __( $this->singular_name() . 's', ROPE_LANG );
+        return __( $this->singular_name() . 's', self::LOCAL_LANG_CODE );
     }
 
     /**
@@ -118,7 +120,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_add_new() : string {
-        return __( 'Add new', ROPE_LANG );
+        return __( 'Add new', self::LOCAL_LANG_CODE );
     }
 
     /**
@@ -127,7 +129,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_add_new_item() : string {
-        return __( 'Add new ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Add new ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     /**
@@ -136,7 +138,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_edit_item() : string {
-        return __( 'Edit ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Edit ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     /**
@@ -145,7 +147,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_new_item() : string {
-        return __( 'New ', ROPE_LANG ) . $this->singular_name();
+        return __( 'New ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     /**
@@ -154,7 +156,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_view_item() : string {
-        return __( 'View ', ROPE_LANG ) . $this->singular_name();
+        return __( 'View ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     /**
@@ -163,7 +165,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_view_items() : string {
-        return __( 'View ', ROPE_LANG ) . $this->plural_name();
+        return __( 'View ', self::LOCAL_LANG_CODE ) . $this->plural_name();
     }
 
     /**
@@ -172,7 +174,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_search_items() : string {
-        return __( 'Search ', ROPE_LANG ) . $this->plural_name();
+        return __( 'Search ', self::LOCAL_LANG_CODE ) . $this->plural_name();
     }
 
     /**
@@ -181,7 +183,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_not_found() : string {
-        return __( 'No ', ROPE_LANG ) . $this->singular_name() . __( ' found.', ROPE_LANG );
+        return __( 'No ', self::LOCAL_LANG_CODE ) . $this->singular_name() . __( ' found.', self::LOCAL_LANG_CODE );
     }
 
     /**
@@ -190,7 +192,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_not_found_in_trash() : string {
-        return __( 'No ', ROPE_LANG ) . $this->singular_name() . __( ' found in Trash.', ROPE_LANG );
+        return __( 'No ', self::LOCAL_LANG_CODE ) . $this->singular_name() . __( ' found in Trash.', self::LOCAL_LANG_CODE );
     }
 
     /**
@@ -199,7 +201,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_parent_item_colon() : string {
-        return __( 'Parent ', ROPE_LANG ) . $this->singular_name() . ':';
+        return __( 'Parent ', self::LOCAL_LANG_CODE ) . $this->singular_name() . ':';
     }
 
     /**
@@ -208,7 +210,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_all_items() : string {
-        return __( 'All ', ROPE_LANG ) . $this->plural_name();
+        return __( 'All ', self::LOCAL_LANG_CODE ) . $this->plural_name();
     }
 
     /**
@@ -217,7 +219,7 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_archives() : string {
-        return $this->singular_name() . __( 'Archives', ROPE_LANG );
+        return $this->singular_name() . __( 'Archives', self::LOCAL_LANG_CODE );
     }
 
     /**
@@ -226,31 +228,31 @@ abstract class Abstract_CPT {
      * @return string
      */
     protected function label_attributes() : string {
-        return $this->singular_name() . __( 'Attributes', ROPE_LANG );
+        return $this->singular_name() . __( 'Attributes', self::LOCAL_LANG_CODE );
     }
 
     protected function label_insert_into_item() : string {
-        return __( 'Inserir no(a) ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Inserir no(a) ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     protected function label_uploaded_to_this_item() : string {
-        return __( 'Anexado neste(a) ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Anexado neste(a) ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     protected function label_featured_image() : string {
-        return __( 'Imagem Destacada', ROPE_LANG );
+        return __( 'Imagem Destacada', self::LOCAL_LANG_CODE );
     }
 
     protected function label_set_featured_image() : string {
-        return __( 'Selecionar Imagem Destacada', ROPE_LANG );
+        return __( 'Selecionar Imagem Destacada', self::LOCAL_LANG_CODE );
     }
 
     protected function label_remove_featured_image() : string {
-        return __( 'Remover Imagem Destacada', ROPE_LANG );
+        return __( 'Remover Imagem Destacada', self::LOCAL_LANG_CODE );
     }
 
     protected function label_use_featured_image() : string {
-        return __( 'Usar Imagem Destacada', ROPE_LANG );
+        return __( 'Usar Imagem Destacada', self::LOCAL_LANG_CODE );
     }
 
     protected function label_menu_name() : string {
@@ -258,35 +260,35 @@ abstract class Abstract_CPT {
     }
 
     protected function label_filter_items_list() : string {
-        return __( 'Filtrar lista de ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Filtrar lista de ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     protected function label_items_list_navigation() : string {
-        return __( 'Navegação de ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Navegação de ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     protected function label_items_list() : string {
-        return __( 'Lista de ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Lista de ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     protected function label_item_published() : string {
-        return $this->singular_name() . __( ' publicado(a).', ROPE_LANG );
+        return $this->singular_name() . __( ' publicado(a).', self::LOCAL_LANG_CODE );
     }
 
     protected function label_item_published_privately() : string {
-        return $this->singular_name() . __( ' publicado(a) de forma privada.', ROPE_LANG );
+        return $this->singular_name() . __( ' publicado(a) de forma privada.', self::LOCAL_LANG_CODE );
     }
 
     protected function label_item_reverted_to_draft() : string {
-        return $this->singular_name() . __( ' revertido(a) à rascunho.', ROPE_LANG );
+        return $this->singular_name() . __( ' revertido(a) à rascunho.', self::LOCAL_LANG_CODE );
     }
 
     protected function label_item_scheduled() : string {
-        return $this->singular_name() . __( ' agendado(a).', ROPE_LANG );
+        return $this->singular_name() . __( ' agendado(a).', self::LOCAL_LANG_CODE );
     }
 
     protected function label_item_updated() : string {
-        return $this->singular_name() . __( ' atualizado(a).', ROPE_LANG );
+        return $this->singular_name() . __( ' atualizado(a).', self::LOCAL_LANG_CODE );
     }
 
     protected function public() : bool {
@@ -294,7 +296,7 @@ abstract class Abstract_CPT {
     }
 
     protected function description() : string {
-        return __( 'Esse é o CPT: ', ROPE_LANG ) . $this->singular_name();
+        return __( 'Esse é o CPT: ', self::LOCAL_LANG_CODE ) . $this->singular_name();
     }
 
     protected function hierarchical() : bool {

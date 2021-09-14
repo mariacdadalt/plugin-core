@@ -6,6 +6,8 @@ use WPillar\Core\Abstractions\Abstract_Subscriber;
 
 class Settings_Page_Subscriber extends Abstract_Subscriber
 {
+    public const LOCAL_LANG_CODE = WPILLAR_LANG;
+
     public const PARENT_SLUG = 'step-main-menu';
     public const OPTIONS_SLUG = 'step-options-page';
     public const SETTINGS_SLUG = 'step-settings-page';
@@ -19,8 +21,8 @@ class Settings_Page_Subscriber extends Abstract_Subscriber
             function () {
                 acf_add_options_page(
                     [
-                        'page_title'  => __( 'Options Page', ROPE_LANG ),
-                        'menu_title'  => __( 'Options', ROPE_LANG ),
+                        'page_title'  => __( 'Options Page', self::LOCAL_LANG_CODE ),
+                        'menu_title'  => __( 'Options', self::LOCAL_LANG_CODE ),
                         'menu_slug'   => self::OPTIONS_SLUG,
                         'capability'  => 'manage_options',
                         'autoload'    => true,
@@ -35,12 +37,12 @@ class Settings_Page_Subscriber extends Abstract_Subscriber
             'admin_menu',
             function () {
                 add_menu_page(
-                    __( 'Modern Tribe', ROPE_LANG ),
-                    __( 'Modern Tribe', ROPE_LANG ),
+                    __( 'WPillar', self::LOCAL_LANG_CODE ),
+                    __( 'WPillar', self::LOCAL_LANG_CODE ),
                     'manage_options',
                     self::PARENT_SLUG,
                     function() {
-                        echo 'This is a Main Page';
+                        echo $this->container->get( Settings_Controller::class )->render( 'WPillar' );
                     },
                     '',
                     100
@@ -48,8 +50,8 @@ class Settings_Page_Subscriber extends Abstract_Subscriber
 
                 add_submenu_page(
                     self::PARENT_SLUG,
-                    __( 'General Settings', ROPE_LANG ),
-                    __( 'General Settings', ROPE_LANG ),
+                    __( 'General Settings', self::LOCAL_LANG_CODE ),
+                    __( 'General Settings', self::LOCAL_LANG_CODE ),
                     'manage_options',
                     self::SETTINGS_SLUG,
                     function() {

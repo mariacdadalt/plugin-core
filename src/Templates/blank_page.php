@@ -16,6 +16,7 @@
 <?php wp_body_open(); ?>
 
 <div id="page">
+
 <?php wpillar_component_show_args('button');
 
 wpillar_get_component( 'button', [
