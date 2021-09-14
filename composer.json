@@ -1,0 +1,22 @@
+{
+  "name": "sysaltech/wpillar-plugin-core",
+  "description": "WPillar's Core Plugin for customizing Wordpress Projects",
+  "type": "wordpress-muplugin",
+  "config": {
+    "platform": {
+      "php": "7.4.7"
+    }
+  },
+  "require":
+  {
+    "php-di/php-di": "6.0.*",
+    "mustache/mustache": "^2.5"
+  },
+  "autoload":
+  {
+    "psr-4":
+    {
+      "WPillar\\Core\\": "src"
+    }
+  }
+}

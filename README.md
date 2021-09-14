@@ -1,1 +1,1 @@
-# wpillar-plugin-core
+# WIP
