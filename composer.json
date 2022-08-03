@@ -10,8 +10,7 @@
   "require":
   {
     "php-di/php-di": "6.0.*",
-    "mustache/mustache": "^2.5",
-    "advanced-custom-fields/advanced-custom-fields-pro": ">=5.10"
+    "mustache/mustache": "^2.5"
   },
   "autoload":
   {
