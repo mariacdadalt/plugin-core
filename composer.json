@@ -1,6 +1,6 @@
 {
-  "name": "sysaltech/wpillar-plugin-core",
-  "description": "WPillar's Core Plugin for customizing Wordpress Projects",
+  "name": "mariacdadalt/plugin-core",
+  "description": "A MU Plugin that acts like a core. You can use it to easily create a new plugin with dependency injection.",
   "type": "wordpress-muplugin",
   "config": {
     "platform": {
