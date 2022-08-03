@@ -34,13 +34,13 @@ load_core_functions();
  * @throws Exception
  */
 function core() {
-    return \Plugin\Core\Core::instance();
+    return Plugin\Core\Core::instance();
 }
 
 /**
  * Register the plugin instance for the Core Plugin.
  */
-core()->register_plugin( new \Plugin\Core\Plugin() );
+core()->register_plugin( new Plugin\Core\Plugin() );
 
 /**
  * Init the plugin after all plugins are loaded.

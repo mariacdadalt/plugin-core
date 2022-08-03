@@ -68,7 +68,7 @@ final class Core
 
     /**
      * This function is used to register new plugins with the same DI Container.
-     * @param IPlugin $plugin
+     * @param Abstract_Plugin $plugin
      */
     public function register_plugin( Abstract_Plugin $plugin ) {
         $this->subscribers = array_merge( $this->subscribers, $plugin->get_subscribers() );
@@ -169,7 +169,7 @@ final class Core
 
     /**
      *
-     * @return Core
+     * @return Plugin/Core/Core
      * @throws Exception
      */
     public static function instance() {
