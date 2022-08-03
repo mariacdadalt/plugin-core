@@ -7,7 +7,7 @@
  * @param string $view
  * @throws Exception
  */
-function wpillar_render_component( string $key, array $args = [], string $view = '' ) {
-    $component = wpillar()->get_component( $key );
+function core_render_component( string $key, array $args = [], string $view = '' ) {
+    $component = core()->get_component( $key );
     echo $component->render( $view, $args );
 }

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace WPillar\Core\Abstractions;
+namespace Plugin\Core\Abstractions;
 
 /**
  * Interface ISubscriber. The classes that implements this interface
  * will hook with wordpress.
- * @package WPillar\Core\Abstractions
+ * @package Plugin\Core\Abstractions
  */
 interface ISubscriber
 {

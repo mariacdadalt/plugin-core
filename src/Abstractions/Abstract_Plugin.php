@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WPillar\Core\Abstractions;
+namespace Plugin\Core\Abstractions;
 
 
 abstract class Abstract_Plugin implements IPlugin
@@ -13,7 +13,7 @@ abstract class Abstract_Plugin implements IPlugin
 
         $class_array = [];
         foreach (glob(dirname( $reflection_class->getFileName() ) . '/Services/**/*_Subscriber.php') as $file ) {
-            $class_array[] = wpillar_tokenizer( $file );
+            $class_array[] = core_tokenizer( $file );
         }
         return $class_array;
     }
@@ -24,7 +24,7 @@ abstract class Abstract_Plugin implements IPlugin
 
         $class_array = [];
         foreach (glob(dirname( $reflection_class->getFileName() ) . '/Services/**/*_Definer.php') as $file ) {
-            $class_array[] = wpillar_tokenizer( $file );
+            $class_array[] = core_tokenizer( $file );
         }
         return $class_array;
     }
@@ -35,7 +35,7 @@ abstract class Abstract_Plugin implements IPlugin
 
         $class_array = [];
         foreach (glob(dirname( $reflection_class->getFileName() ) . '/Services/**/*_Runner.php') as $file ) {
-            $class_array[] = wpillar_tokenizer( $file );
+            $class_array[] = core_tokenizer( $file );
         }
         return $class_array;
     }
@@ -46,7 +46,7 @@ abstract class Abstract_Plugin implements IPlugin
 
         $component_array = [];
         foreach (glob(dirname( $reflection_class->getFileName() ) . '/Components/**/*_Component.php') as $file ) {
-            $component_class = wpillar_tokenizer( $file );
+            $component_class = core_tokenizer( $file );
             $component_array[ $component_class::key() ] = $component_class;
         }
         return $component_array;
@@ -58,7 +58,7 @@ abstract class Abstract_Plugin implements IPlugin
 
         $class_array = [];
         foreach (glob(dirname( $reflection_class->getFileName() ) . '/Services/**/*_CPT.php') as $file ) {
-            $class_array[] = wpillar_tokenizer( $file );
+            $class_array[] = core_tokenizer( $file );
         }
         return $class_array;
     }

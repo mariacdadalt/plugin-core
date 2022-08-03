@@ -1,9 +1,9 @@
 <?php
 
 
-namespace WPillar\Core\Abstractions;
+namespace Plugin\Core\Abstractions;
 
-use WPillar\Core\Classes\Mustache_Renderer;
+use Plugin\Core\Classes\Mustache_Renderer;
 
 /**
  * Class Core_Controller implements Abstract Controller passing the src folder of the plugin.

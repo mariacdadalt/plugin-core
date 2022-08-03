@@ -1,10 +1,10 @@
 <?php
 
 
-namespace WPillar\Core\Classes;
+namespace Plugin\Core\Classes;
 
 
-use WPillar\Core\Abstractions\Abstract_ACF_Field;
+use Plugin\Core\Abstractions\Abstract_ACF_Field;
 
 class ACF_Field_Text extends Abstract_ACF_Field
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WPillar\Core\Abstractions;
+namespace Plugin\Core\Abstractions;
 
 
 use Psr\Container\ContainerInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPillar\Core\Abstractions;
+namespace Plugin\Core\Abstractions;
 
 
 abstract class Abstract_Controller

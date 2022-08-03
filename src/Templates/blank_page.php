@@ -17,9 +17,9 @@
 
 <div id="page">
 
-<?php wpillar_component_show_args('button');
+<?php core_component_show_args('button');
 
-wpillar_get_component( 'button', [
+core_get_component( 'button', [
     'content' => 'Hello'
 ] ); ?>
 

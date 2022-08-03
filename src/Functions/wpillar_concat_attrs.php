@@ -7,7 +7,7 @@
  * @param string $prefix
  * @return string
  */
-function wpillar_concat_attrs( array $attrs = null, $prefix = '' ) {
+function core_concat_attrs( array $attrs = null, $prefix = '' ) {
     if ( empty( $attrs ) ) {
         return '';
     }
@@ -15,7 +15,7 @@ function wpillar_concat_attrs( array $attrs = null, $prefix = '' ) {
     $prefix = empty( $prefix ) ? '' : rtrim( $prefix, '-' ) . '-';
     foreach ( $attrs as $key => $value ) {
         if ( is_array( $value ) ) {
-            $out[] = wpillar_concat_attrs( $value, $key );
+            $out[] = core_concat_attrs( $value, $key );
         } else {
             $out[] = sprintf( '%s="%s"', $prefix . $key, esc_attr( $value ) );
         }

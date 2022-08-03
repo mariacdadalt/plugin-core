@@ -7,7 +7,7 @@
  * @param null $default
  * @return int|mixed|string|null
  */
-function wpillar_get_constant($name, $default = null ) {
+function core_get_constant($name, $default = null ) {
     if ( ! defined( $name ) ) {
         return $default;
     }

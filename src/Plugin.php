@@ -1,10 +1,10 @@
 <?php
 
 
-namespace WPillar\Core;
+namespace Plugin\Core;
 
 
-use WPillar\Core\Abstractions\Abstract_Plugin;
+use Plugin\Core\Abstractions\Abstract_Plugin;
 
 class Plugin extends Abstract_Plugin
 {
@@ -14,8 +14,6 @@ class Plugin extends Abstract_Plugin
 
     public static function get_dependencies(): array
     {
-        return [
-            'advanced-custom-fields-pro/acf.php',
-        ];
+        return [];
     }
 }

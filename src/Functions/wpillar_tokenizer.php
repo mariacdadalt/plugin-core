@@ -7,7 +7,7 @@
  * @param $file
  * @return mixed|string
  */
-function wpillar_tokenizer( string $file ) {
+function core_tokenizer( string $file ) {
     $fp = fopen($file, 'r');
     $namespace = '';
     $class = $buffer = '';

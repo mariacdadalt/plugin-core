@@ -5,6 +5,6 @@
  *
  * @param $data
  */
-function wpillar_d( $data ) {
+function core_d( $data ) {
     highlight_string("<?php\n\$data =\n" . var_export($data, true) . ";\n?>");
 }

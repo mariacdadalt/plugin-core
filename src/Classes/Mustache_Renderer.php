@@ -1,8 +1,8 @@
 <?php
 
-namespace WPillar\Core\Classes;
+namespace Plugin\Core\Classes;
 
-use WPillar\Core\Abstractions\Abstract_Renderer;
+use Plugin\Core\Abstractions\Abstract_Renderer;
 use \Mustache_Engine;
 use \Mustache_Loader_FilesystemLoader;
 

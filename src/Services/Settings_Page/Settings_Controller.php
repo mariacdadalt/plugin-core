@@ -1,10 +1,10 @@
 <?php
 
 
-namespace WPillar\Core\Services\Settings_Page;
+namespace Plugin\Core\Services\Settings_Page;
 
 
-use WPillar\Core\Abstractions\Core_Controller;
+use Plugin\Core\Abstractions\Core_Controller;
 
 class Settings_Controller extends Core_Controller
 {

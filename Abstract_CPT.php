@@ -12,7 +12,7 @@ use WP_REST_Posts_Controller;
  */
 abstract class Abstract_CPT {
 
-    public const LOCAL_LANG_CODE = PLUGIN_CORE_LANG;
+    public const LOCAL_LANG_CODE = PLUGIN_CORE;
 
     /**
      * What is the name of this post type? If you don't override any of the labels,

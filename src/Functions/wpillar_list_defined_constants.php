@@ -6,7 +6,7 @@
  *
  * @param string $category Default for 'user'.
  */
-function wpillar_list_defined_constants( $category = 'user') {
+function core_list_defined_constants( $category = 'user') {
     echo "<pre style='background-color:white'>";
     if ( 'all' == $category ) {
         print_r(get_defined_constants(true));

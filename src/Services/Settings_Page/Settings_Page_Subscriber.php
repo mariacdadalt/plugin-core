@@ -1,18 +1,18 @@
 <?php
 
-namespace WPillar\Core\Services\Settings_Page;
+namespace Plugin\Core\Services\Settings_Page;
 
-use WPillar\Core\Abstractions\Abstract_Subscriber;
+use Plugin\Core\Abstractions\Abstract_Subscriber;
 
 class Settings_Page_Subscriber extends Abstract_Subscriber
 {
-    public const LOCAL_LANG_CODE = WPILLAR_LANG;
+    public const LOCAL_LANG_CODE = PLUGIN_CORE_LANG;
 
     public const PARENT_SLUG = 'step-main-menu';
     public const OPTIONS_SLUG = 'step-options-page';
     public const SETTINGS_SLUG = 'step-settings-page';
 
-    public const FILTER_RENDER_RUNNER_PAGE = 'wpillar/core/services/settings-page/runners';
+    public const FILTER_RENDER_RUNNER_PAGE = 'plugin/core/services/settings-page/runners';
 
     public function subscribe()
     {
@@ -37,12 +37,12 @@ class Settings_Page_Subscriber extends Abstract_Subscriber
             'admin_menu',
             function () {
                 add_menu_page(
-                    __( 'WPillar', self::LOCAL_LANG_CODE ),
-                    __( 'WPillar', self::LOCAL_LANG_CODE ),
+                    __( 'Plugin Core', self::LOCAL_LANG_CODE ),
+                    __( 'Plugin Core', self::LOCAL_LANG_CODE ),
                     'manage_options',
                     self::PARENT_SLUG,
                     function() {
-                        echo $this->container->get( Settings_Controller::class )->render( 'WPillar' );
+                        echo $this->container->get( Settings_Controller::class )->render( 'core-view' );
                     },
                     '',
                     100

@@ -8,7 +8,7 @@
  * @return mixed
  * @throws Exception
  */
-function wpillar_get_active_plugins( $plugins ) {
+function core_get_active_plugins( $plugins ) {
     /*
     * Occasionally it seems a boolean can be passed in here.
     */
@@ -17,7 +17,7 @@ function wpillar_get_active_plugins( $plugins ) {
     }
 
     // Add our force-activated plugins
-    $plugins = array_merge( (array) $plugins, wpillar()->get_dependencies() );
+    $plugins = array_merge( (array) $plugins, core()->get_dependencies() );
 
     // Deduplicate
     $plugins = array_unique( $plugins );
@@ -37,9 +37,9 @@ function wpillar_get_active_plugins( $plugins ) {
  *
  * @return array
  */
-function wpillar_plugin_action_links( $actions, $plugin_file ) {
+function core_plugin_action_links( $actions, $plugin_file ) {
 
-    if ( in_array( $plugin_file, wpillar()->get_dependencies(), true ) ) {
+    if ( in_array( $plugin_file, core()->get_dependencies(), true ) ) {
         unset( $actions['deactivate'] );
     }
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace WPillar\Core;
+namespace Plugin\Core;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
-use WPillar\Core\Abstractions\IPlugin;
+use Plugin\Core\Abstractions\IPlugin;
 
 final class Core
 {
-    public const FILTER_DEFINERS = 'wpillar/core/definers';
-    public const FILTER_SUBSCRIBERS = 'wpillar/core/subscribers';
+    public const FILTER_DEFINERS = 'plugin/core/definers';
+    public const FILTER_SUBSCRIBERS = 'plugin/core/subscribers';
 
     /**
      * @var self

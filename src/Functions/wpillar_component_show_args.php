@@ -7,7 +7,7 @@
  * @param $key
  * @throws Exception
  */
-function wpillar_component_show_args( $key ) {
-    $component = wpillar()->get_component( $key );
-    wpillar_d( $component->get_context() );
+function core_component_show_args( $key ) {
+    $component = core()->get_component( $key );
+    core_d( $component->get_context() );
 }

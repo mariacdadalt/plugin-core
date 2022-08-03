@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WPillar\Core\Classes;
+namespace Plugin\Core\Classes;
 
 
 class ACF_Conditional_Logic_Group

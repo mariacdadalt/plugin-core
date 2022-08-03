@@ -1,9 +1,9 @@
 <?php
 
 
-namespace WPillar\Core\Components\Button;
+namespace Plugin\Core\Components\Button;
 
-use WPillar\Core\Abstractions\Abstract_Component;
+use Plugin\Core\Abstractions\Abstract_Component;
 
 class Button_Component extends Abstract_Component
 {

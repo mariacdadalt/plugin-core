@@ -1,9 +1,9 @@
 <?php
 
-namespace WPillar\Core\Abstractions;
+namespace Plugin\Core\Abstractions;
 
 
-use WPillar\Core\Classes\ACF_Conditional_Logic_Group;
+use Plugin\Core\Classes\ACF_Conditional_Logic_Group;
 
 abstract class Abstract_ACF_Field
 {
