@@ -6,7 +6,10 @@ namespace Plugin\Core\Abstractions;
 
 use Psr\Container\ContainerInterface;
 
-abstract class Abstract_Subscriber implements ISubscriber
+/**
+ * The classes that extends this will hook with wordpress.
+ */
+abstract class Abstract_Subscriber
 {
     /**
      * @var ContainerInterface
@@ -19,4 +22,6 @@ abstract class Abstract_Subscriber implements ISubscriber
     public function __construct( ContainerInterface $container ) {
         $this->container = $container;
     }
+
+	public abstract function subscribe();
 }

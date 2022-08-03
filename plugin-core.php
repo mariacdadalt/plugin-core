@@ -18,7 +18,7 @@ if ( ! defined( 'PLUGIN_CORE_LANG' ) ) {
 }
 
 /**
- * Autoload step functions
+ * Autoload utility functions
  */
 function load_core_functions() {
     foreach ( glob( PLUGIN_CORE_DIR . '/src/Functions/*.php' ) as $file ) {

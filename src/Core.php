@@ -3,6 +3,7 @@
 namespace Plugin\Core;
 
 use DI\ContainerBuilder;
+use Plugin\Core\Abstractions\Abstract_Plugin;
 use Psr\Container\ContainerInterface;
 use Plugin\Core\Abstractions\IPlugin;
 
@@ -69,7 +70,7 @@ final class Core
      * This function is used to register new plugins with the same DI Container.
      * @param IPlugin $plugin
      */
-    public function register_plugin( IPlugin $plugin ) {
+    public function register_plugin( Abstract_Plugin $plugin ) {
         $this->subscribers = array_merge( $this->subscribers, $plugin->get_subscribers() );
         $this->definers    = array_merge( $this->definers, $plugin->get_definers() );
         $this->cpts    = array_merge( $this->cpts, $plugin->get_cpts() );

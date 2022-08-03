@@ -4,10 +4,10 @@
 namespace Plugin\Core\Abstractions;
 
 
-abstract class Abstract_Plugin implements IPlugin
+abstract class Abstract_Plugin
 {
 
-    public static function get_subscribers(): array
+    public function get_subscribers(): array
     {
         $reflection_class = new \ReflectionClass( get_called_class() );
 
@@ -18,7 +18,7 @@ abstract class Abstract_Plugin implements IPlugin
         return $class_array;
     }
 
-    public static function get_definers(): array
+    public function get_definers(): array
     {
         $reflection_class = new \ReflectionClass( get_called_class() );
 
@@ -29,7 +29,7 @@ abstract class Abstract_Plugin implements IPlugin
         return $class_array;
     }
 
-    public static function get_runners(): array
+    public function get_runners(): array
     {
         $reflection_class = new \ReflectionClass( get_called_class() );
 
@@ -40,7 +40,7 @@ abstract class Abstract_Plugin implements IPlugin
         return $class_array;
     }
 
-    public static function get_components(): array
+    public function get_components(): array
     {
         $reflection_class = new \ReflectionClass( get_called_class() );
 
@@ -52,7 +52,7 @@ abstract class Abstract_Plugin implements IPlugin
         return $component_array;
     }
 
-    public static function get_cpts(): array
+    public function get_cpts(): array
     {
         $reflection_class = new \ReflectionClass( get_called_class() );
 
@@ -63,7 +63,7 @@ abstract class Abstract_Plugin implements IPlugin
         return $class_array;
     }
 
-    abstract static function set_constants(): void;
+    abstract function set_constants(): void;
 
-    abstract static function get_dependencies(): array;
+    abstract function get_dependencies(): array;
 }

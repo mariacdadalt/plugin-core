@@ -15,6 +15,8 @@ class ACF_Conditional_Logic_Group
         foreach ( $this->conditional_logics as $logic ) {
             $logics[] = $logic->build();
         }
+
+		return $logics;
     }
 
     public function add_conditional_logic( ACF_Conditional_Logic $conditional ) : void {
