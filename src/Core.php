@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Plugin\Core;
 
 use DI\ContainerBuilder;
-use Plugin\Core\Abstractions\Abstract_Plugin;
+use Plugin\Core\Abstractions\AbstractComponent;
+use Plugin\Core\Abstractions\AbstractPlugin;
 use Psr\Container\ContainerInterface;
-use Plugin\Core\Abstractions\IPlugin;
 
 final class Core
 {
@@ -62,42 +64,31 @@ final class Core
     /**
      * Function that inits the plugin.
      */
-    public function init() {
-        $this->init_container();
+    public function init()
+    {
+
+        $this->initContainer();
     }
 
     /**
      * This function is used to register new plugins with the same DI Container.
-     * @param Abstract_Plugin $plugin
+     * @param AbstractPlugin $plugin
      */
-    public function register_plugin( Abstract_Plugin $plugin ) {
-        $this->subscribers = array_merge( $this->subscribers, $plugin->get_subscribers() );
-        $this->definers    = array_merge( $this->definers, $plugin->get_definers() );
-        $this->cpts    = array_merge( $this->cpts, $plugin->get_cpts() );
-        $plugin->set_constants();
-        $this->runners   = array_merge( $this->runners, $plugin->get_runners() );
-        $this->dependencies = array_merge( $this->dependencies, $plugin->get_dependencies() );
-        $this->components = array_merge( $this->components, $plugin->get_components() );
+    public function registerPlugin(AbstractPlugin $plugin): void
+    {
+        $plugin->defineConstants();
+        $this->subscribers = array_merge($this->subscribers, $plugin->loadSubscribers());
+        $this->definers = array_merge($this->definers, $plugin->loadDefiners());
+        $this->cpts = array_merge($this->cpts, $plugin->loadCpts());
+        $this->runners = array_merge($this->runners, $plugin->loadRunners());
+        $this->dependencies = array_merge($this->dependencies, $plugin->loadDependencies());
+        $this->components = array_merge($this->components, $plugin->loadComponents());
     }
 
-    public function get_component( string $key ) {
-        return new $this->components[$key];
-    }
+    public function component(string $key): AbstractComponent
+    {
 
-    /**
-     * Return the list of Runners in the application.
-     * @return string[]
-     */
-    public function get_runners() : array {
-        return $this->runners;
-    }
-
-    /**
-     * Return the list of Dependencies in the application.
-     * @return string[]
-     */
-    public function get_dependencies() : array {
-        return $this->dependencies;
+        return new $this->components[$key]();
     }
 
     /**
@@ -105,40 +96,41 @@ final class Core
      *
      * @throws \Exception
      */
-    private function init_container() : void {
+    private function initContainer(): void
+    {
 
         /**
          * Filter the list of definers that power the plugin
          *
          * @param string[] $definers The class names of definers that will be instantiated
          */
-        $this->definers = apply_filters( self::FILTER_DEFINERS, $this->definers );
+        $this->definers = apply_filters(self::FILTER_DEFINERS, $this->definers);
 
         /**
          * Filter the list subscribers that power the plugin
          *
          * @param string[] $subscribers The class names of subscribers that will be instantiated
          */
-        $this->subscribers = apply_filters( self::FILTER_SUBSCRIBERS, $this->subscribers );
+        $this->subscribers = apply_filters(self::FILTER_SUBSCRIBERS, $this->subscribers);
 
         $builder = new ContainerBuilder();
-        $builder->useAutowiring( true );
-        $builder->useAnnotations( false );
-        $builder->addDefinitions( ... array_map( static function ( $classname ) {
-            return ( new $classname() )->define();
-        }, $this->definers ) );
+        $builder->useAutowiring(true);
+        $builder->useAnnotations(false);
+        $builder->addDefinitions(... array_map(static function (string $classname): void {
+            ( new $classname() )->define();
+        }, $this->definers));
 
         $this->container = $builder->build();
 
-        foreach ( $this->subscribers as $subscriber_class ) {
-            ( new $subscriber_class( $this->container ) )->subscribe();
+        foreach ($this->subscribers as $subscriberClass) {
+            ( new $subscriberClass($this->container) )->subscribe();
         }
 
         add_action(
             'init',
             function () {
-                foreach ( $this->cpts as $cpt_class ) {
-                    ( new $cpt_class )->register();
+                foreach ($this->cpts as $cptClass) {
+                    ( new $cptClass() )->register();
                 }
             }
         );
@@ -149,22 +141,28 @@ final class Core
      *
      * @return ContainerInterface
      */
-    public function container(): ContainerInterface {
+    public function container(): ContainerInterface
+    {
+
         return $this->container;
     }
 
     /**
      * Cloning is forbidden.
      */
-    public function __clone() {
-        _doing_it_wrong( __FUNCTION__, 'Cloning is forbidden.', '1.0' );
+    public function __clone()
+    {
+
+        _doing_it_wrong(__FUNCTION__, 'Cloning is forbidden.', '1.0');
     }
 
     /**
      * Unserializing instances of this class is forbidden.
      */
-    public function __wakeup() {
-        _doing_it_wrong( __FUNCTION__, 'Wakeup is forbidden.', '1.0' );
+    public function __wakeup()
+    {
+
+        _doing_it_wrong(__FUNCTION__, 'Wakeup is forbidden.', '1.0');
     }
 
     /**
@@ -172,9 +170,10 @@ final class Core
      * @return Plugin/Core/Core
      * @throws Exception
      */
-    public static function instance() {
+    public static function instance(): Core
+    {
 
-        if ( ! isset( self::$instance ) ) {
+        if (! isset(self::$instance)) {
             self::$instance = new self();
         }
 

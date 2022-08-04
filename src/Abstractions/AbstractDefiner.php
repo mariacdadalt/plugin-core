@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Plugin\Core\Abstractions;
-
 
 /**
  * The classes that extends this
  * will define dependencies for the PHP_DI.
  */
-abstract class Abstract_Definer
+abstract class AbstractDefiner
 {
-	public abstract function define();
+    abstract public function define();
 }

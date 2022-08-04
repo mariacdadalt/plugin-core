@@ -1,14 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Plugin\Core\Abstractions;
 
-
-abstract class Abstract_Controller
+abstract class AbstractController
 {
     /**
      * The renderer passed to the controller in the provider.
      *
-     * @var Abstract_Renderer
+     * @var AbstractRenderer
      */
     protected $renderer;
 
@@ -17,7 +18,7 @@ abstract class Abstract_Controller
      *
      * @var string
      */
-    protected $dir_name;
+    protected $dirName;
 
     /**
      * Controller constructor.
@@ -25,11 +26,13 @@ abstract class Abstract_Controller
      * making a child of this class and giving it a Rendered that is a
      * child of the Abstract_Renderer.
      *
-     * @param Abstract_Renderer $renderer
+     * @param AbstractRenderer $renderer
      */
-    public function __construct( Abstract_Renderer $renderer ) {
+    public function __construct(AbstractRenderer $renderer)
+    {
+
         $this->renderer = $renderer;
-        $this->dir_name = $this->getName();
+        $this->dirName = $this->dirName();
     }
 
     /**
@@ -37,10 +40,12 @@ abstract class Abstract_Controller
      *
      * @return mixed|string
      */
-    protected function getName() {
-        $path = explode( '\\', get_class( $this ) );
-        array_pop( $path );
-        return array_pop( $path );
+    protected function dirName()
+    {
+
+        $path = explode('\\', get_class($this));
+        array_pop($path);
+        return array_pop($path);
     }
 
     /**
@@ -51,7 +56,8 @@ abstract class Abstract_Controller
      *
      * @param array $args
      */
-    public function set_args( array $args = [] ) {
+    public function args(array $args = [])
+    {
         $context = [
             'context' => array_merge(
                 [
@@ -60,11 +66,13 @@ abstract class Abstract_Controller
                 $args
             ),
         ];
-        $this->renderer->set_args( $context );
+        $this->renderer->args($context);
     }
 
-    protected function set_sub_directory() {
-        $this->renderer->set_sub_directory( 'Services/' . $this->dir_name . '/Views' );
+    protected function subDirectory()
+    {
+
+        $this->renderer->subDirectory('Services/' . $this->dirName . '/Views');
     }
 
     /**
@@ -74,10 +82,12 @@ abstract class Abstract_Controller
      *
      * @return string
      */
-    public function render( $view = 'Index' ) {
-        $this->set_args();
-        $this->set_sub_directory();
-        return $this->renderer->render( $view );
+    public function render(string $view = 'Index'): string
+    {
+
+        $this->args();
+        $this->subDirectory();
+        return $this->renderer->render($view);
     }
 
     /**
@@ -87,9 +97,11 @@ abstract class Abstract_Controller
      *
      * @return string
      */
-    public function shared( $view = 'Index' ) {
-        $this->set_args();
-        $this->renderer->set_shared_dir( 'Shared_Views' );
-        return $this->renderer->shared( $view );
+    public function shared(string $view = 'Index'): string
+    {
+
+        $this->args();
+        $this->renderer->set_shared_dir('Shared_Views');
+        return $this->renderer->shared($view);
     }
 }

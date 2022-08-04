@@ -1,18 +1,18 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Plugin\Core;
 
+use Plugin\Core\Abstractions\AbstractPlugin;
 
-use Plugin\Core\Abstractions\Abstract_Plugin;
-
-class Plugin extends Abstract_Plugin
+class Plugin extends AbstractPlugin
 {
-    public function set_constants(): void
+    public function defineConstants(): void
     {
     }
 
-    public function get_dependencies(): array
+    public function loadDependencies(): array
     {
         return [];
     }

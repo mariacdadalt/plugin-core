@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Plugin\Core\Abstractions;
-
 
 use Psr\Container\ContainerInterface;
 
 /**
- * The classes that extends this will hook with wordpress.
+ * The classes that extends this will hook with WordPress.
  */
-abstract class Abstract_Subscriber
+abstract class AbstractSubscriber
 {
     /**
      * @var ContainerInterface
@@ -19,9 +19,11 @@ abstract class Abstract_Subscriber
     /**
      * Abstract_Subscriber constructor.
      */
-    public function __construct( ContainerInterface $container ) {
+    public function __construct(ContainerInterface $container)
+    {
+
         $this->container = $container;
     }
 
-	public abstract function subscribe();
+    abstract public function subscribe();
 }
