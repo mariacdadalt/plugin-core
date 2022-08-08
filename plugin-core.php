@@ -33,3 +33,15 @@ function core(): Core
  * Register the plugin instance for the Core Plugin.
  */
 core()->registerPlugin(new Plugin());
+
+/**
+ * Start the core after all plugins have been registered.
+ */
+add_action(
+    'plugins_loaded',
+    static function () {
+        core()->init();
+    },
+    99,
+    0
+);

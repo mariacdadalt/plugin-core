@@ -69,7 +69,6 @@ abstract class AbstractPlugin
 
     public function cpts(): array
     {
-
         $reflectionClass = new \ReflectionClass(get_called_class());
 
         $classArray = [];
