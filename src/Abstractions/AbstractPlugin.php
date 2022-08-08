@@ -14,7 +14,7 @@ abstract class AbstractPlugin
         $classArray = [];
         foreach (
             glob(dirname($reflectionClass->getFileName()) .
-            '/Services/**/*_Subscriber.php') as $file
+            '/Services/**/*Subscriber.php') as $file
         ) {
             $classArray[] = core()->tokenizer($file);
         }
@@ -29,7 +29,7 @@ abstract class AbstractPlugin
         $classArray = [];
         foreach (
             glob(dirname($reflectionClass->getFileName()) .
-            '/Services/**/*_Definer.php') as $file
+            '/Services/**/*Definer.php') as $file
         ) {
             $classArray[] = core()->tokenizer($file);
         }
@@ -44,7 +44,7 @@ abstract class AbstractPlugin
         $classArray = [];
         foreach (
             glob(dirname($reflectionClass->getFileName()) .
-            '/Services/**/*_Runner.php') as $file
+            '/Services/**/*Runner.php') as $file
         ) {
             $classArray[] = core()->tokenizer($file);
         }
@@ -59,7 +59,7 @@ abstract class AbstractPlugin
         $componentArray = [];
         foreach (
             glob(dirname($reflectionClass->getFileName()) .
-            '/Components/**/*_Component.php') as $file
+            '/Components/**/*Component.php') as $file
         ) {
             $componentClass = core()->tokenizer($file);
             $componentArray[ $componentClass::key() ] = $componentClass;
@@ -75,7 +75,7 @@ abstract class AbstractPlugin
         $classArray = [];
         foreach (
             glob(dirname($reflectionClass->getFileName()) .
-            '/Services/**/*_CPT.php') as $file
+            '/Services/**/*CPT.php') as $file
         ) {
             $classArray[] = core()->tokenizer($file);
         }

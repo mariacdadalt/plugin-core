@@ -24,7 +24,7 @@ abstract class AbstractComponent
 
     protected bool $hasContent = false;
 
-    abstract protected function key(): string;
+    abstract protected static function key(): string;
     abstract protected function defaults(): array;
 
     public function __construct()

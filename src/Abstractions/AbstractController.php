@@ -101,7 +101,7 @@ abstract class AbstractController
     {
 
         $this->args();
-        $this->renderer->set_shared_dir('Shared_Views');
+        $this->renderer->sharedDir('Shared_Views');
         return $this->renderer->shared($view);
     }
 }

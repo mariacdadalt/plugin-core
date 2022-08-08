@@ -8,7 +8,7 @@ use Plugin\Core\Abstractions\AbstractComponent;
 
 class ButtonComponent extends AbstractComponent
 {
-    public function key(): string
+    public static function key(): string
     {
         return 'button';
     }

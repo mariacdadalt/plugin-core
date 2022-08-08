@@ -154,7 +154,16 @@ final class Core
         */
         add_filter(
             'option_active_plugins',
-            [ $this, 'filterActivePlugins'],
+            static function ($plugins) {
+                /*
+                * Occasionally it seems a boolean can be passed in here.
+                */
+                if (! is_array($plugins)) {
+                    return $plugins;
+                }
+
+                return core()->filterActivePlugins($plugins);
+            },
             10,
             1
         );
@@ -170,15 +179,16 @@ final class Core
         );
     }
 
-    public function filterActivePlugins(mixed $plugins): array
+    /**
+    * Changes the array of active plugins to force active the ones that
+    * are required.
+    *
+    * @param array $plugins
+    * @return array
+    * @throws Exception
+    */
+    public function filterActivePlugins(array $plugins): array
     {
-        /*
-        * Occasionally it seems a boolean can be passed in here.
-        */
-        if (! is_array($plugins)) {
-            return $plugins;
-        }
-
         // Add our force-activated plugins
         $plugins = array_merge((array) $plugins, $this->dependencies);
 
@@ -246,7 +256,7 @@ final class Core
     *
     * @param $data
     */
-    public static function debug(mixed $data): void
+    public function debug(object $data): void
     {
         highlight_string("<?php\n\$data =\n" . var_export($data, true) . ";\n?>");
     }
@@ -258,7 +268,7 @@ final class Core
     * @param $key
     * @throws Exception
     */
-    public static function showComponentArgs(string $key): void
+    public function showComponentArgs(string $key): void
     {
         $component = core()->component($key);
         core()->debug($component->context());
@@ -271,7 +281,7 @@ final class Core
     * @param string $prefix
     * @return string
     */
-    public static function concatAttrs(array $attrs = null, string $prefix = ''): string
+    public function concatAttrs(array $attrs = null, string $prefix = ''): string
     {
 
         if (empty($attrs)) {
@@ -298,7 +308,7 @@ final class Core
     * @param string $view
     * @throws Exception
     */
-    public static function renderComponent(string $key, array $args = [], string $view = ''): void
+    public function renderComponent(string $key, array $args = [], string $view = ''): void
     {
         $component = core()->component($key);
         echo esc_html($component->render($view, $args));
@@ -309,9 +319,9 @@ final class Core
     *
     * @param $name
     * @param null $default
-    * @return mixed
+    * @return object
     */
-    public static function constant(mixed $name, mixed $default = null): mixed
+    public function constant(string $name, object $default = null): object
     {
 
         if (! defined($name)) {
@@ -342,7 +352,7 @@ final class Core
      *
      * @param string $category Default for 'user'.
      */
-    public static function showDefinedConstants(string $category = 'user'): void
+    public function showDefinedConstants(string $category = 'user'): void
     {
         echo "<pre style='background-color:white'>";
         if ('all' === $category) {
@@ -361,7 +371,7 @@ final class Core
      * @param $file
      * @return string
      */
-    public static function tokenizer(string $file): string
+    public function tokenizer(string $file): string
     {
 
         $fopen = fopen($file, 'r');
