@@ -102,7 +102,7 @@ abstract class AbstractComponent
 
         if (is_array($context['context']['attributes'])) {
             $context['context']['attributes'] =
-            core_concat_attrs($context['context']['attributes']);
+            core()->concatAttrs($context['context']['attributes']);
         }
 
         $this->renderer->args($context);
