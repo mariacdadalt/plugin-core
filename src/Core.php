@@ -68,45 +68,7 @@ final class Core
      */
     public function init()
     {
-
         $this->initContainer();
-    }
-
-    /**
-     * This function is used to register new plugins with the same DI Container.
-     * @param AbstractPlugin $plugin
-     */
-    public function registerPlugin(AbstractPlugin $plugin): void
-    {
-        $plugin->defineConstants();
-        $this->subscribers = array_merge($this->subscribers, $plugin->subscribers());
-        $this->definers = array_merge($this->definers, $plugin->definers());
-        $this->cpts = array_merge($this->cpts, $plugin->cpts());
-        $this->runners = array_merge($this->runners, $plugin->runners());
-        $this->dependencies = array_merge($this->dependencies, $plugin->dependencies());
-        $this->components = array_merge($this->components, $plugin->components());
-    }
-
-    public function component(string $key): AbstractComponent
-    {
-
-        return new $this->components[$key]();
-    }
-
-    /**
-     * Inits the DI Container
-     *
-     * @throws \Exception
-     */
-    private function initContainer(): void
-    {
-
-        /**
-         * Filter the list of definers that power the plugin
-         *
-         * @param string[] $definers The class names of definers that will be instantiated
-         */
-        $this->definers = apply_filters(self::FILTER_DEFINERS, $this->definers);
 
         /**
          * Filter the list subscribers that power the plugin
@@ -114,15 +76,6 @@ final class Core
          * @param string[] $subscribers The class names of subscribers that will be instantiated
          */
         $this->subscribers = apply_filters(self::FILTER_SUBSCRIBERS, $this->subscribers);
-
-        $builder = new ContainerBuilder();
-        $builder->useAutowiring(true);
-        $builder->useAnnotations(false);
-        $builder->addDefinitions(... array_map(static function (string $classname): void {
-            ( new $classname() )->define();
-        }, $this->definers));
-
-        $this->container = $builder->build();
 
         foreach ($this->subscribers as $subscriberClass) {
             ( new $subscriberClass($this->container) )->subscribe();
@@ -135,18 +88,6 @@ final class Core
                     ( new $cptClass() )->register();
                 }
             }
-        );
-
-        /**
-         * Init the plugin after all plugins are loaded.
-         */
-        add_action(
-            'plugins_loaded',
-            static function () {
-                core()->init();
-            },
-            99,
-            0
         );
 
         /**
@@ -177,6 +118,51 @@ final class Core
             99,
             2
         );
+    }
+
+    /**
+     * This function is used to register new plugins with the same DI Container.
+     * @param AbstractPlugin $plugin
+     */
+    public function registerPlugin(AbstractPlugin $plugin): void
+    {
+        $plugin->defineConstants();
+        $this->subscribers = array_merge($this->subscribers, $plugin->subscribers());
+        $this->definers = array_merge($this->definers, $plugin->definers());
+        $this->cpts = array_merge($this->cpts, $plugin->cpts());
+        $this->runners = array_merge($this->runners, $plugin->runners());
+        $this->dependencies = array_merge($this->dependencies, $plugin->dependencies());
+        $this->components = array_merge($this->components, $plugin->components());
+    }
+
+    public function component(string $key): AbstractComponent
+    {
+
+        return new $this->components[$key]();
+    }
+
+    /**
+     * Inits the DI Container
+     *
+     * @throws \Exception
+     */
+    private function initContainer(): void
+    {
+        /**
+         * Filter the list of definers that power the plugin
+         *
+         * @param string[] $definers The class names of definers that will be instantiated
+         */
+        $this->definers = apply_filters(self::FILTER_DEFINERS, $this->definers);
+
+        $builder = new ContainerBuilder();
+        $builder->useAutowiring(true);
+        $builder->useAnnotations(false);
+        $builder->addDefinitions(... array_map(static function (string $classname): void {
+            ( new $classname() )->define();
+        }, $this->definers));
+
+        $this->container = $builder->build();
     }
 
     /**
@@ -238,10 +224,11 @@ final class Core
      * @return Core
      * @throws Exception
      */
-    public static function instance(): Core
+    public static function instance(): self
     {
         if (! isset(self::$instance)) {
             self::$instance = new self();
+            self::$instance->init();
         }
 
         return self::$instance;
