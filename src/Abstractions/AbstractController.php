@@ -30,9 +30,11 @@ abstract class AbstractController
      */
     public function __construct(AbstractRenderer $renderer)
     {
+        $this->dirName = $this->dirName();
 
         $this->renderer = $renderer;
-        $this->dirName = $this->dirName();
+        $reflectionClass = new \ReflectionClass(get_called_class());
+        $this->renderer->baseDir(dirname(dirname(dirname($reflectionClass->getFileName()))));
     }
 
     /**
@@ -71,7 +73,6 @@ abstract class AbstractController
 
     protected function subDirectory()
     {
-
         $this->renderer->subDirectory('Services/' . $this->dirName . '/Views');
     }
 

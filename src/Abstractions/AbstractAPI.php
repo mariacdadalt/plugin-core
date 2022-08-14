@@ -19,10 +19,15 @@ abstract class AbstractAPI
         $this->url = $url;
     }
 
-    public function requestGET(): array
+    public function requestGET(array $args = []): array
     {
-        $response = wp_remote_get($this->url);
+        $response = wp_remote_get($this->parseUrl($args), $args);
         return $this->parseResponse($response);
+    }
+
+    protected function parseUrl(array $args): string
+    {
+        return $this->url;
     }
 
     protected function parseResponse($response): array //phpcs:ignore

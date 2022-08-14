@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Plugin\Core\Classes;
+namespace Plugin\Core\Services\Renderer;
 
 use Plugin\Core\Abstractions\AbstractRenderer;
 use Mustache_Engine;
@@ -13,21 +13,31 @@ class MustacheRenderer extends AbstractRenderer
     /**
      * @var Mustache_Engine
      */
-    private $mEngine;
+    private $engine;
 
     /**
      * @var array
      */
     private $args;
 
-    public function __construct(string $dirName)
+    public function __construct()
     {
+        $this->args = [
+            'context' => [],
+        ];
+    }
 
-        $this->mEngine = new Mustache_Engine(
+    public function engine(): Mustache_Engine
+    {
+        if (isset($this->engine)) {
+            return $this->engine;
+        }
+
+        $this->engine = new Mustache_Engine(
             [
                 'cache' => null,
                 'loader' => new Mustache_Loader_FilesystemLoader(
-                    $dirName,
+                    $this->baseDir,
                     [
                         'extension' => '.html',
                     ]
@@ -36,9 +46,7 @@ class MustacheRenderer extends AbstractRenderer
             ]
         );
 
-        $this->args = [
-            'context' => [],
-        ];
+        return $this->engine;
     }
 
     public function args(array $args): void
@@ -48,11 +56,11 @@ class MustacheRenderer extends AbstractRenderer
 
     public function render(string $view = 'Index'): string
     {
-        return $this->mEngine->render($this->subDirectory . '/' . $view, $this->args['context']);
+        return $this->engine()->render($this->subDirectory . '/' . $view, $this->args['context']);
     }
 
     public function shared(string $view = 'Index'): string
     {
-        return $this->mEngine->render($this->sharedDir . '/' . $view, $this->args['context']);
+        return $this->engine()->render($this->sharedDir . '/' . $view, $this->args['context']);
     }
 }

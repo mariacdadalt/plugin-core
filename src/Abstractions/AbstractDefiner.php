@@ -10,5 +10,5 @@ namespace Plugin\Core\Abstractions;
  */
 abstract class AbstractDefiner
 {
-    abstract public function define();
+    abstract public function define(): array;
 }

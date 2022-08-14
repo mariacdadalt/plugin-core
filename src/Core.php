@@ -158,9 +158,9 @@ final class Core
         $builder = new ContainerBuilder();
         $builder->useAutowiring(true);
         $builder->useAnnotations(false);
-        $builder->addDefinitions(... array_map(static function (string $classname): void {
-            ( new $classname() )->define();
-        }, $this->definers));
+        foreach ($this->definers as $definer) {
+            $builder->addDefinitions(( new $definer() )->define());
+        }
 
         $this->container = $builder->build();
     }
@@ -242,7 +242,7 @@ final class Core
     *
     * @param $data
     */
-    public function debug(object $data): void
+    public function debug($data): void //phpcs:ignore
     {
         highlight_string("<?php\n\$data =\n" . var_export($data, true) . ";\n?>");
     }
