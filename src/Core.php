@@ -63,6 +63,8 @@ final class Core
 
     private array $components = [];
 
+    private array $plugins = [];
+
     /**
      * Function that inits the plugin.
      */
@@ -81,14 +83,18 @@ final class Core
             ( new $subscriberClass($this->container) )->subscribe();
         }
 
-        add_action(
-            'init',
-            function () {
-                foreach ($this->cpts as $cptClass) {
-                    ( new $cptClass() )->register();
-                }
+        add_action('init', function () {
+            foreach ($this->cpts as $cptClass) {
+                ( new $cptClass() )->register();
             }
-        );
+        });
+
+        add_action('wp_enqueue_scripts', function () {
+            foreach ($this->plugins as $plugin) {
+                $plugin->styles();
+                $plugin->scripts();
+            }
+        });
 
         /**
         * Force activate the required plugins.
@@ -133,6 +139,7 @@ final class Core
         $this->runners = array_merge($this->runners, $plugin->runners());
         $this->dependencies = array_merge($this->dependencies, $plugin->dependencies());
         $this->components = array_merge($this->components, $plugin->components());
+        $this->plugins[$plugin::NAME] = $plugin;
     }
 
     public function component(string $key): AbstractComponent
