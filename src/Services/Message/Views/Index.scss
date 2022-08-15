@@ -1,0 +1,27 @@
+.plugin-core-message {
+	margin: 1em;
+	padding: 1em;
+	position: relative;
+
+	&.plugin-core-message__alert {
+		background-color: orange;
+		border-color: orangered;
+	}
+
+	.plugin-core-message__icon {}
+
+	.plugin-core-message__content {
+		margin: 0px;
+	}
+
+	.plugin-core-message__close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 20px;
+		height: 20px;
+		margin-top: 10px;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+}

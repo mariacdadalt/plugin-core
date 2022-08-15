@@ -151,9 +151,13 @@ final class Core
         $this->plugins[$plugin::NAME] = $plugin;
     }
 
+    public function plugin(string $name): AbstractPlugin
+    {
+        return $this->plugins[$name];
+    }
+
     public function component(string $key): AbstractComponent
     {
-
         return new $this->components[$key]();
     }
 
@@ -261,6 +265,32 @@ final class Core
     public function debug($data): void //phpcs:ignore
     {
         highlight_string("<?php\n\$data =\n" . var_export($data, true) . ";\n?>");
+    }
+
+    /**
+     * Helper function that creates a log fili inside the core plugin.
+     */
+    public function log($message) //phpcs:ignore
+    {
+        $dirLog = $this->plugin(Plugin::NAME)->path() . '/logs';
+        if (! is_dir($dirLog)) {
+            mkdir($dirLog);
+        }
+
+        $dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+        $caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : null;
+        $callerClass = isset($dbt[1]['class']) ? $dbt[1]['class'] : null;
+
+        $date = new \DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
+
+        if (! is_string($message)) {
+            $message = var_export($message, true);
+        }
+
+        $file = fopen($dirLog . '/' . $date->format('Y-m-d') . '.log', 'a');
+
+        fwrite($file, $date->format('H:i:s - ') . $callerClass . ':' . $caller . ' -- ' . $message . PHP_EOL);
+        fclose($file);
     }
 
     /**
