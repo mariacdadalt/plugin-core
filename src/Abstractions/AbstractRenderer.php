@@ -25,8 +25,6 @@ abstract class AbstractRenderer
         $this->baseDir = $dir;
     }
 
-    abstract public function args(array $args);
-
     abstract public function render();
 
     abstract public function shared();

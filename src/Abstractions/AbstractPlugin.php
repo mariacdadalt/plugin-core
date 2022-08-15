@@ -91,7 +91,7 @@ abstract class AbstractPlugin
         }
         chdir($directory);
         foreach (glob('*.{js,JS}', GLOB_BRACE) as $file) {
-            wp_enqueue_script($this::NAME . '-JS', $this->url() . 'dist/' . $file, [ 'jquery' ], $this::VERSION, true);
+            wp_enqueue_script($this::NAME, $this->url() . 'dist/' . $file, [ 'jquery' ], $this::VERSION, true);
         }
     }
 
@@ -105,7 +105,7 @@ abstract class AbstractPlugin
         foreach (
             glob('*.{css,CSS}', GLOB_BRACE) as $file
         ) {
-            wp_enqueue_style($this::NAME . '-CSS', $this->url() . 'dist/' . $file, [], $this::VERSION, 'all');
+            wp_enqueue_style($this::NAME, $this->url() . 'dist/' . $file, [], $this::VERSION, 'all');
         }
     }
 

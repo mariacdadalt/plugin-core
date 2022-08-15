@@ -20,6 +20,8 @@ abstract class AbstractController
      */
     protected $dirName;
 
+    protected $args = [];
+
     /**
      * Controller constructor.
      * The best way to change the Renderer for a controller is by
@@ -60,7 +62,7 @@ abstract class AbstractController
      */
     protected function args(array $args = [])
     {
-        $context = [
+        $this->args = [
             'context' => array_merge(
                 [
                     'content' => '',
@@ -68,7 +70,6 @@ abstract class AbstractController
                 $args
             ),
         ];
-        $this->renderer->args($context);
     }
 
     protected function subDirectory()
@@ -87,7 +88,7 @@ abstract class AbstractController
     {
         $this->args($args);
         $this->subDirectory();
-        return $this->renderer->render($view);
+        return $this->renderer->render($this->args['context'], $view);
     }
 
     /**
@@ -101,6 +102,6 @@ abstract class AbstractController
     {
         $this->args($args);
         $this->renderer->sharedDir('Services/Shared/Views');
-        return $this->renderer->shared($view);
+        return $this->renderer->shared($this->args['context'], $view);
     }
 }

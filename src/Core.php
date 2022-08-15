@@ -79,7 +79,6 @@ final class Core
          * @param string[] $subscribers The class names of subscribers that will be instantiated
          */
         $this->subscribers = apply_filters(self::FILTER_SUBSCRIBERS, $this->subscribers);
-
         foreach ($this->subscribers as $subscriberClass) {
             ( new $subscriberClass($this->container) )->subscribe();
         }
@@ -103,7 +102,7 @@ final class Core
                 ]
             );
 
-            wp_localize_script(Plugin::NAME . '-JS', 'pluginObj', $values);
+            wp_localize_script(Plugin::NAME, 'pluginObj', $values);
         }, 99);
 
         /**

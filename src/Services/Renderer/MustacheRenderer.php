@@ -13,14 +13,7 @@ class MustacheRenderer extends AbstractRenderer
     /**
      * @var array
      */
-    private $args;
-
-    public function __construct()
-    {
-        $this->args = [
-            'context' => [],
-        ];
-    }
+    private $args = [];
 
     public function engine(): Mustache_Engine
     {
@@ -38,18 +31,13 @@ class MustacheRenderer extends AbstractRenderer
         );
     }
 
-    public function args(array $args): void
+    public function render(array $args = [], string $view = 'Index'): string
     {
-        $this->args = array_merge($this->args, $args);
+        return $this->engine()->render($this->subDirectory . '/' . $view, $args);
     }
 
-    public function render(string $view = 'Index'): string
+    public function shared(array $args = [], string $view = 'Index'): string
     {
-        return $this->engine()->render($this->subDirectory . '/' . $view, $this->args['context']);
-    }
-
-    public function shared(string $view = 'Index'): string
-    {
-        return $this->engine()->render($this->sharedDir . '/' . $view, $this->args['context']);
+        return $this->engine()->render($this->sharedDir . '/' . $view, $args);
     }
 }
