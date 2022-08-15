@@ -15,6 +15,7 @@ final class Core
 {
     public const FILTER_DEFINERS = 'plugin/core/definers';
     public const FILTER_SUBSCRIBERS = 'plugin/core/subscribers';
+    public const FILTER_AJAX_OBJECT = 'plugin/core/ajax/object';
 
     /**
      * @var self
@@ -94,7 +95,16 @@ final class Core
                 $plugin->styles();
                 $plugin->scripts();
             }
-        });
+
+            $values = apply_filters(
+                $this::FILTER_AJAX_OBJECT,
+                [
+                    'ajaxUrl' => admin_url('admin-ajax.php'),
+                ]
+            );
+
+            wp_localize_script(Plugin::NAME . '-JS', 'pluginObj', $values);
+        }, 99);
 
         /**
         * Force activate the required plugins.

@@ -40,7 +40,7 @@ abstract class AbstractPlugin
     public function subscribers(): array
     {
         $classArray = [];
-        foreach (glob($this->path() . '/Services/**/*Subscriber.php') as $file) {
+        foreach (glob($this->path() . '/src/Services/**/*Subscriber.php') as $file) {
             $classArray[] = core()->tokenizer($file);
         }
         return $classArray;
@@ -49,7 +49,7 @@ abstract class AbstractPlugin
     public function definers(): array
     {
         $classArray = [];
-        foreach (glob($this->path() . '/Services/**/*Definer.php') as $file) {
+        foreach (glob($this->path() . '/src/Services/**/*Definer.php') as $file) {
             $classArray[] = core()->tokenizer($file);
         }
         return $classArray;
@@ -58,7 +58,7 @@ abstract class AbstractPlugin
     public function runners(): array
     {
         $classArray = [];
-        foreach (glob($this->path() . '/Services/**/*Runner.php') as $file) {
+        foreach (glob($this->path() . '/src/Services/**/*Runner.php') as $file) {
             $classArray[] = core()->tokenizer($file);
         }
         return $classArray;
@@ -67,7 +67,7 @@ abstract class AbstractPlugin
     public function components(): array
     {
         $componentArray = [];
-        foreach (glob($this->path() . '/Components/**/*Component.php') as $file) {
+        foreach (glob($this->path() . '/src/Components/**/*Component.php') as $file) {
             $componentClass = core()->tokenizer($file);
             $componentArray[ $componentClass::key() ] = $componentClass;
         }
@@ -77,7 +77,7 @@ abstract class AbstractPlugin
     public function cpts(): array
     {
         $classArray = [];
-        foreach (glob($this->path() . '/Services/**/*CPT.php') as $file) {
+        foreach (glob($this->path() . '/src/Services/**/*CPT.php') as $file) {
             $classArray[] = core()->tokenizer($file);
         }
         return $classArray;

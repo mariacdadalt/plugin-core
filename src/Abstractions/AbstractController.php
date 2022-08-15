@@ -85,7 +85,6 @@ abstract class AbstractController
      */
     public function render(string $view = 'Index'): string
     {
-
         $this->args();
         $this->subDirectory();
         return $this->renderer->render($view);
@@ -100,9 +99,8 @@ abstract class AbstractController
      */
     public function shared(string $view = 'Index'): string
     {
-
         $this->args();
-        $this->renderer->sharedDir('Shared_Views');
+        $this->renderer->sharedDir('Services/Shared/Views');
         return $this->renderer->shared($view);
     }
 }
