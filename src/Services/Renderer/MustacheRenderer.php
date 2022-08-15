@@ -11,11 +11,6 @@ use Mustache_Loader_FilesystemLoader;
 class MustacheRenderer extends AbstractRenderer
 {
     /**
-     * @var Mustache_Engine
-     */
-    private $engine;
-
-    /**
      * @var array
      */
     private $args;
@@ -29,11 +24,7 @@ class MustacheRenderer extends AbstractRenderer
 
     public function engine(): Mustache_Engine
     {
-        if (isset($this->engine)) {
-            return $this->engine;
-        }
-
-        $this->engine = new Mustache_Engine(
+        return new Mustache_Engine(
             [
                 'cache' => null,
                 'loader' => new Mustache_Loader_FilesystemLoader(
@@ -45,8 +36,6 @@ class MustacheRenderer extends AbstractRenderer
                 'entity_flags' => ENT_QUOTES,
             ]
         );
-
-        return $this->engine;
     }
 
     public function args(array $args): void

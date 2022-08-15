@@ -34,7 +34,8 @@ abstract class AbstractController
 
         $this->renderer = $renderer;
         $reflectionClass = new \ReflectionClass(get_called_class());
-        $this->renderer->baseDir(dirname(dirname(dirname($reflectionClass->getFileName()))));
+        $baseDir = dirname(dirname(dirname($reflectionClass->getFileName())));
+        $this->renderer->baseDir($baseDir);
     }
 
     /**
@@ -44,7 +45,6 @@ abstract class AbstractController
      */
     protected function dirName()
     {
-
         $path = explode('\\', get_class($this));
         array_pop($path);
         return array_pop($path);
@@ -58,7 +58,7 @@ abstract class AbstractController
      *
      * @param array $args
      */
-    public function args(array $args = [])
+    protected function args(array $args = [])
     {
         $context = [
             'context' => array_merge(
@@ -83,9 +83,9 @@ abstract class AbstractController
      *
      * @return string
      */
-    public function render(string $view = 'Index'): string
+    public function render(array $args = [], string $view = 'Index'): string
     {
-        $this->args();
+        $this->args($args);
         $this->subDirectory();
         return $this->renderer->render($view);
     }
@@ -97,9 +97,9 @@ abstract class AbstractController
      *
      * @return string
      */
-    public function shared(string $view = 'Index'): string
+    public function shared(array $args = [], string $view = 'Index'): string
     {
-        $this->args();
+        $this->args($args);
         $this->renderer->sharedDir('Services/Shared/Views');
         return $this->renderer->shared($view);
     }
