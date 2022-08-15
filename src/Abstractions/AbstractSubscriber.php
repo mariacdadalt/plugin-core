@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Plugin\Core\Abstractions;
 
-use Psr\Container\ContainerInterface;
 use DI\FactoryInterface;
 
 /**
@@ -13,16 +12,15 @@ use DI\FactoryInterface;
 abstract class AbstractSubscriber
 {
     /**
-     * @var ContainerInterface
+     * @var FactoryInterface
      */
-    protected ContainerInterface $container;
+    protected FactoryInterface $container;
 
     /**
      * Abstract_Subscriber constructor.
      */
     public function __construct(FactoryInterface $container)
     {
-
         $this->container = $container;
     }
 
