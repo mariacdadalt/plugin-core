@@ -11,17 +11,17 @@ use Mustache_Loader_FilesystemLoader;
 class MustacheRenderer extends AbstractRenderer
 {
     /**
-     * @var array
+     * @var Mustache_Engine
      */
-    private $args = [];
+    private $engine;
 
-    public function engine(): Mustache_Engine
+    public function __construct(string $baseDir)
     {
-        return new Mustache_Engine(
+        $this->engine = new Mustache_Engine(
             [
                 'cache' => null,
                 'loader' => new Mustache_Loader_FilesystemLoader(
-                    $this->baseDir,
+                    $baseDir,
                     [
                         'extension' => '.html',
                     ]
@@ -33,11 +33,11 @@ class MustacheRenderer extends AbstractRenderer
 
     public function render(array $args = [], string $view = 'Index'): string
     {
-        return $this->engine()->render($this->subDirectory . '/' . $view, $args);
+        return $this->engine->render($this->subDirectory . '/' . $view, $args);
     }
 
     public function shared(array $args = [], string $view = 'Index'): string
     {
-        return $this->engine()->render($this->sharedDir . '/' . $view, $args);
+        return $this->engine->render($this->sharedDir . '/' . $view, $args);
     }
 }

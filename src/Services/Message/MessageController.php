@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Plugin\Core\Services\Message;
 
-use Plugin\Core\Abstractions\AbstractController;
+use Plugin\Core\Abstractions\CoreController;
 
-class MessageController extends AbstractController
+class MessageController extends CoreController
 {
 }

@@ -14,11 +14,11 @@ abstract class AbstractController
     protected $renderer;
 
     /**
-     * The directory where the class is. Apply to its child.
+     * The name of the class, without namespaces and "Controller"
      *
      * @var string
      */
-    protected $dirName;
+    protected $className;
 
     protected $args = [];
 
@@ -32,12 +32,8 @@ abstract class AbstractController
      */
     public function __construct(AbstractRenderer $renderer)
     {
-        $this->dirName = $this->dirName();
-
+        $this->className = $this->className();
         $this->renderer = $renderer;
-        $reflectionClass = new \ReflectionClass(get_called_class());
-        $baseDir = dirname(dirname(dirname($reflectionClass->getFileName())));
-        $this->renderer->baseDir($baseDir);
     }
 
     /**
@@ -45,7 +41,7 @@ abstract class AbstractController
      *
      * @return mixed|string
      */
-    protected function dirName()
+    protected function className()
     {
         $path = explode('\\', get_class($this));
         array_pop($path);
@@ -74,7 +70,7 @@ abstract class AbstractController
 
     protected function subDirectory()
     {
-        $this->renderer->subDirectory('Services/' . $this->dirName . '/Views');
+        $this->renderer->subDirectory('Services/' . $this->className . '/Views');
     }
 
     /**
@@ -88,6 +84,7 @@ abstract class AbstractController
     {
         $this->args($args);
         $this->subDirectory();
+        core()->log($this->renderer);
         return $this->renderer->render($this->args['context'], $view);
     }
 

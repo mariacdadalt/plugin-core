@@ -8,7 +8,6 @@ abstract class AbstractRenderer
 {
     protected $subDirectory;
     protected $sharedDir;
-    protected $baseDir;
 
     public function subDirectory(string $dir): void
     {
@@ -18,11 +17,6 @@ abstract class AbstractRenderer
     public function sharedDir(string $dir): void
     {
         $this->sharedDir = $dir;
-    }
-
-    public function baseDir(string $dir): void
-    {
-        $this->baseDir = $dir;
     }
 
     abstract public function render();
