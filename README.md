@@ -57,7 +57,7 @@ Most of the names used in this projects have some functionality agregated to it.
 
 ## Usage
 
-This project is a framework to make your job easier when coding a new plugin. If you want to create a plugin based in this project, the first thing you need to do is create your plugin from [this template](https://github.com/mariacdadalt/plugin-template/generate). This project works better with the [WP Started](https://wecodemore.github.io/wpstarter/) package, that allows us to require this recent created plugin in our `composer.json` file. That way, this project is mostly ready to use. Take a look at the [Plugin Template](https://github.com/mariacdadalt/plugin-template)'s README to some instructions on how to use the features.
+This project is a framework to make your job easier when coding a new plugin. If you want to create a plugin based in this project, the first thing you need to do is create your plugin from [this template](https://github.com/mariacdadalt/plugin-template/generate). This project works better with the [WP Starter](https://wecodemore.github.io/wpstarter/) package, that allows us to require this recent created plugin in our `composer.json` file. That way, this project is mostly ready to use. Take a look at the [Plugin Template](https://github.com/mariacdadalt/plugin-template)'s README to some instructions on how to use the features.
 
 If you don't want to use the VCS repository for this plugin, you can add the following repo to your `composer.json`.
 
