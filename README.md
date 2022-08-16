@@ -47,14 +47,13 @@ Most of the names used in this projects have some functionality agregated to it.
 		- Inside this folder, all files related to the Views can be found. The `Index.html` is a reserved name for the default render of the service. You can create other html files here, to render, passing the name of the file to the controller.
 		- If you're using the webpack for compiling code, then all Javascript created inside this folder will be enqueued on the page automatically. To enqueue the styles, use a `import './Index.scss'` inside the js file. That way the webpack will know to compile it.
 	- `*Controller` Files
-		- Controller files are very powerful, but they have a few constraints. As a naming convention, you always need to name your controller after your Service Name + Controller. So, for example, if you have a ˜UserDetail˜ service (where the name of the folder is UserDetail), your controller would necesserelly need to be called ˜UserDetailController˜. Using this name convention, this controller will be able to render any html files inside the views folder.
+		- Controller files are very powerful, but they have a few constraints. Extend the `YourProjectController` class (see usage to know how to create it). As a naming convention, you always need to name your controller after your Service Name + Controller. So, for example, if you have a ˜UserDetail˜ service (where the name of the folder is UserDetail), your controller would necesserelly need to be called ˜UserDetailController˜. Using this name convention, this controller will be able to render any html files inside the views folder.
 	- `*Subscriber` Files
-		-
+		- Subscriber files are the ones responsible for connecting your services to WordPress. Extend the `AbstractSubscriber` class and add your hooks and filters in the `subscribe()` function.
 	- `*Definer` Files
-		-
-	- `*Runner` Files
-		-
+		- Definers are special classes used by the DI container to specify injections that can't be autowired. This is very useful to set a default constructor variable, like a API Url, for example.
 	- `*CPT` Files
+		- CPT classes are used to create Custom Post Types. If following the naming conventions, this class is added automatically to wordpress, without the need to hook it in a subscriber.
 
 ## Usage
 
