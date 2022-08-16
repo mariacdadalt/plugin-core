@@ -14,7 +14,7 @@ abstract class AbstractAPI
 {
     protected string $url;
     protected string $cache;
-    protected string $args;
+    protected array $args;
 
     public function __construct(string $url)
     {
