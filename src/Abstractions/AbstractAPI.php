@@ -21,10 +21,13 @@ abstract class AbstractAPI
         $this->url = $url;
     }
 
-    public function requestGET(array $args = []): array
+    public function changeArgs(array $args): void
     {
         $this->args = $args;
+    }
 
+    public function requestGET(array $args = []): array
+    {
         if ($this->hasCache()) {
             return $this->formatBody($this->cache);
         }
