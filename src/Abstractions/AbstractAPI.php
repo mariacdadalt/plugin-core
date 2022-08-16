@@ -14,6 +14,7 @@ abstract class AbstractAPI
 {
     protected string $url;
     protected string $cache;
+    protected string $args;
 
     public function __construct(string $url)
     {
@@ -22,15 +23,17 @@ abstract class AbstractAPI
 
     public function requestGET(array $args = []): array
     {
+        $this->args = $args;
+
         if ($this->hasCache()) {
             return $this->formatBody($this->cache);
         }
 
-        $response = wp_remote_get($this->parseUrl($args), $args);
+        $response = wp_remote_get($this->parseUrl(), $args);
         return $this->parseResponse($response);
     }
 
-    protected function parseUrl(array $args): string
+    protected function parseUrl(): string
     {
         return $this->url;
     }

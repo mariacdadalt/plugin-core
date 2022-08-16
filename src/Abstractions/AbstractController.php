@@ -84,7 +84,6 @@ abstract class AbstractController
     {
         $this->args($args);
         $this->subDirectory();
-        core()->log($this->renderer);
         return $this->renderer->render($this->args['context'], $view);
     }
 
