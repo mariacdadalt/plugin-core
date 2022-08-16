@@ -13,6 +13,7 @@ use Exception;
 abstract class AbstractAPI
 {
     protected string $url;
+    protected string $cache;
 
     public function __construct(string $url)
     {
@@ -21,6 +22,10 @@ abstract class AbstractAPI
 
     public function requestGET(array $args = []): array
     {
+        if ($this->hasCache()) {
+            return $this->formatBody($this->cache);
+        }
+
         $response = wp_remote_get($this->parseUrl($args), $args);
         return $this->parseResponse($response);
     }
@@ -44,13 +49,31 @@ abstract class AbstractAPI
 
         if ($this->treatResponseCode($code)) {
             $body = wp_remote_retrieve_body($response);
+            set_transient($this->cacheKey(), $body, 300);
             return $this->formatBody($body);
         }
 
         return [];
     }
 
+    /**
+     * Checks if a transient exists
+     * @return bool
+     */
+    protected function hasCache(): bool
+    {
+        $transient = get_transient($this->cacheKey());
+        if ($transient === false) {
+            return false;
+        }
+
+        $this->cache = $transient;
+        return true;
+    }
+
     abstract protected function treatResponseCode(int $code): bool;
 
     abstract protected function formatBody(string $body): array;
+
+    abstract protected function cacheKey(): string;
 }
