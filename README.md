@@ -5,9 +5,9 @@ This project creates a MU Plugin that acts like a framework for new plugins. The
 **Main advantages**
 - Makes the base code for a project easier to update, since it is separated from the features of the project.
 - Allows an easy way to share code between projects, with little to no changes.
-- A cleaner features plugin, where the base code that allows for modern development is hidden in the plugin-core.
+- A cleaner __project plugin__, since the base code is hidden in the `plugin-core`.
 - Spin up a new plugin with modern development tools takes little time.
-- Cleaner PR's, with only main files needing changes.
+- Cleaner PR's, following DRY principles.
 
 ## Concepts and Tools
 
